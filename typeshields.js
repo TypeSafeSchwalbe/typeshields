@@ -92,9 +92,9 @@ const array = (content_type) => {
 }
 
 const instance = (class_constructor) => {
-    if(typeof content_type !== "function") { throw "The provided class is invalid!"; }
+    if(typeof class_constructor !== "function") { throw "The provided class is invalid!"; }
     const checker = (value) => {
-        if(value instanceof class_constructor) { throw `type mismatch: expected type '${checker._TYPE_SHIELD_AS_STRING}', got '${typeof value}' instead`; }
+        if(!(value instanceof class_constructor)) { throw `type mismatch: expected type '${checker._TYPE_SHIELD_AS_STRING}', got '${typeof value}' instead`; }
         return value;
     };
     checker._TYPE_SHIELD_AS_STRING =`instance(${class_constructor.name})`;
@@ -105,9 +105,7 @@ const instance = (class_constructor) => {
 if(typeof module !== "undefined") { module.exports = { any, unit, number, string, object, func, array }; }
 
 
-const push_onto_array = (T) => (func([array(T), T], unit)) ((arr, v) => {
-    arr.push(v);
-});
 
-let a = [0, 1, 2, 3];
-push_onto_array(number)(a, 4);
+
+let a = (instance(Map)) (new Map());
+let b = (instance(Map)) (25); 

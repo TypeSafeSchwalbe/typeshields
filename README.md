@@ -47,13 +47,13 @@ type mismatch: expected type 'string', got 'number' instead
 ```
 <br>
 
-The`instance`-shield accepts the class that the value must be an instance of:
+The `instance`-shield accepts the class that the value must be an instance of:
 ```js
 let a = (instance(Map)) (new Map());
 let b = (instance(Map)) (25); 
 ```
 ```
-Uncaught type mismatch: expected type 'instance(Map)', got 'object' instead
+Uncaught type mismatch: expected type 'instance(Map)', got 'number' instead
 ```
 <br>
 
