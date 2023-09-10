@@ -103,9 +103,3 @@ const instance = (class_constructor) => {
 
 
 if(typeof module !== "undefined") { module.exports = { any, unit, number, string, object, func, array }; }
-
-
-
-
-let a = (instance(Map)) (new Map());
-let b = (instance(Map)) (25); 
