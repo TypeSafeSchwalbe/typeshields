@@ -63,7 +63,7 @@ let abc = (array(string)) (["A", "B", "C", "D", "E"]);
 let primes = (array(number)) ([1, 2, 3, 5, 7, "11", 13]);
 ```
 ```
-Uncaught type mismatch (6th element of 'array(number)'): expected type 'number', got 'string' instead
+Uncaught type mismatch (6th element (index 5) of 'array(number)'): expected type 'number', got 'string' instead
 ```
 <br>
 
