@@ -59,11 +59,10 @@ const func = (param_types, return_type) => {
             }
             const returned = value(...arguments);
             try {
-                (return_type) (returned);
+                return (return_type) (returned);
             } catch(e) {
                 throw `type mismatch (return value of '${checker._TYPE_SHIELD_AS_STRING}'): expected type '${return_type._TYPE_SHIELD_AS_STRING}', got '${typeof returned}' instead`;
             }
-            return returned;
         };
         wrapper._TYPE_SHIELD_IS_CHECKER_WRAPPER = true;
         return wrapper;
@@ -101,5 +100,18 @@ const instance = (class_constructor) => {
     return checker;
 };
 
+const union = (...possible_types) => {
+    const checker = (value) => {
+        for(const t of possible_types) {
+            try {
+                return (t) (value);
+            } catch(e) {}
+        }
+        throw `type mismatch: expected type '${checker._TYPE_SHIELD_AS_STRING}', got '${typeof value}' instead`;
+    };
+    checker._TYPE_SHIELD_AS_STRING =`union(${possible_types.map((t) => t._TYPE_SHIELD_AS_STRING).join(", ")})`;
+    return checker;
+};
 
-if(typeof module !== "undefined") { module.exports = { any, unit, number, string, object, func, array }; }
+
+if(typeof module !== "undefined") { module.exports = { any, unit, number, string, object, func, array, instance, union }; }

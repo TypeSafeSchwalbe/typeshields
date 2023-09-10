@@ -28,6 +28,8 @@ Add runtime type checking to your Javascript code without writing a bunch of boi
     - Requires the value to be a function.
     - `p` is expected to be an array where every element has to be a type shield, and (when the function is called) every parameter value will be checked against the type shield stored in `p` at the same index.
     - `r` is expected to a type shield where (when the function is called) the return type will be checked against `r`.
+- `union(...v)`
+    - Expects a variable amount of type shields as parameters, and at least one of them must be applicable to the checked value.
 
 ### How to use
 
@@ -86,6 +88,17 @@ let cookie = (Cat) ({
 ```
 ```
 type mismatch (member 'age' of 'object {name: string, age: number}'): expected type 'number', got 'undefined' instead
+```
+<br>
+
+The `union`-shield accepts a variable number of type shields, and only requires that one of them is applicable to the checked value:
+```js
+let a = (union(string, number)) ("Hi");
+let b = (union(string, number)) (6.2);
+let c = (union(string, number)) ([]);
+```
+```
+Uncaught type mismatch: expected type 'union(string, number)', got 'object' instead
 ```
 <br>
 
